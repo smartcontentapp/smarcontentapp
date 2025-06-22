@@ -1,246 +1,188 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>SmartContent - Plataforma Inteligente de Contenido</title>
-<style>
-  /* Reset */
-  * {
-    margin: 0; padding: 0; box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  body {
-    background: #f9fafb;
-    color: #222;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-  /* Header */
-  header {
-    background: #003366;
-    color: white;
-    padding: 1.5rem 2rem;
-    text-align: center;
-    font-size: 2.2rem;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-  }
-  /* Nav */
-  nav {
-    background: #0055aa;
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    padding: 1rem 0;
-    position: sticky;
-    top: 72px; /* altura del header */
-    z-index: 999;
-  }
-  nav button {
-    background: transparent;
-    border: none;
-    color: white;
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    padding: 0.6rem 1.2rem;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-  nav button:hover,
-  nav button.active {
-    background-color: #002244;
-  }
-  main {
-    flex: 1;
-    max-width: 960px;
-    margin: 2rem auto 4rem auto;
-    padding: 0 1rem;
-  }
-  section {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    padding: 2rem;
-    margin-bottom: 3rem;
-  }
-  h1, h2 {
-    color: #003366;
-    margin-bottom: 1rem;
-  }
-  h1 {
-    font-size: 2.4rem;
-  }
-  p, li {
-    font-size: 1.1rem;
-    line-height: 1.6;
-  }
-  ul {
-    margin-top: 0.5rem;
-    margin-left: 1.5rem;
-  }
-  label {
-    display: block;
-    margin-top: 1.2rem;
-    font-weight: 600;
-  }
-  select, textarea, input[type="text"], input[type="email"] {
-    width: 100%;
-    margin-top: 0.5rem;
-    padding: 0.6rem 0.8rem;
-    font-size: 1rem;
-    border: 1.5px solid #ccc;
-    border-radius: 6px;
-    resize: vertical;
-    transition: border-color 0.3s ease;
-  }
-  select:focus, textarea:focus, input[type="text"]:focus, input[type="email"]:focus {
-    border-color: #0055aa;
-    outline: none;
-  }
-  button.generate-btn {
-    margin-top: 1.8rem;
-    background: #0055aa;
-    border: none;
-    padding: 0.9rem 2rem;
-    font-size: 1.1rem;
-    color: white;
-    font-weight: 700;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  button.generate-btn:hover {
-    background: #003366;
-  }
-  #output {
-    margin-top: 1.5rem;
-    background: #e6f0ff;
-    padding: 1.2rem 1.5rem;
-    border-radius: 8px;
-    min-height: 120px;
-    font-size: 1.1rem;
-    white-space: pre-wrap;
-    box-shadow: inset 0 0 10px rgba(0,85,170,0.2);
-    color: #002244;
-  }
-  /* Footer */
-  footer {
-    background: #003366;
-    color: white;
-    text-align: center;
-    padding: 1rem 1rem;
-    font-size: 0.9rem;
-  }
-  footer a {
-    color: #a9cdfb;
-    text-decoration: underline;
-  }
-  /* Responsive */
-  @media (max-width: 700px) {
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartContentApp - Generador de Contenido con IA</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+      background: #f5f7fa;
+      line-height: 1.6;
+    }
+    header {
+      background: #1e1e2f;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.5rem;
+    }
     nav {
-      flex-wrap: wrap;
-      gap: 0.6rem;
+      background: #141421;
+      display: flex;
+      justify-content: center;
+      padding: 10px;
     }
-    main {
-      margin: 1rem;
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
     }
-  }
-</style>
+    nav a:hover {
+      color: #00d1b2;
+    }
+    section {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .features, .testimonios, .planes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    footer {
+      background: #1e1e2f;
+      color: white;
+      text-align: center;
+      padding: 30px 10px;
+    }
+    form input, form textarea {
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .btn {
+      background: #00d1b2;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: #00bfa5;
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <h1>SmartContentApp</h1>
+    <p>Tu plataforma inteligente para generar contenido con inteligencia artificial</p>
+  </header>
 
-<header>SmartContent</header>
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#funciones">Funciones</a>
+    <a href="#demo">Demo</a>
+    <a href="#planes">Planes</a>
+    <a href="#testimonios">Testimonios</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
 
-<nav>
-  <button class="active" data-section="home">Inicio</button>
-  <button data-section="generator">Generador IA</button>
-  <button data-section="blog">Blog</button>
-  <button data-section="services">Servicios</button>
-  <button data-section="faq">FAQ</button>
-  <button data-section="contact">Contacto</button>
-</nav>
-
-<main>
-  <!-- Inicio -->
-  <section id="home" class="active-section">
-    <h1>Bienvenido a SmartContent</h1>
-    <p>La plataforma inteligente para crear contenido original y atractivo con ayuda de inteligencia artificial. Ahorra tiempo y multiplica tu productividad con nuestra solución fácil y eficiente.</p>
-    <p>Explora las funcionalidades en el menú y comienza a generar contenido para tus redes sociales, blogs, emails y más.</p>
+  <section id="inicio">
+    <h2>¿Qué es SmartContentApp?</h2>
+    <p>SmartContentApp es una herramienta de inteligencia artificial que genera textos, ideas, artículos, copys publicitarios y más en segundos. Ideal para creadores, marketers, bloggers y empresas que buscan eficiencia y creatividad.</p>
   </section>
 
-  <!-- Generador IA -->
-  <section id="generator" style="display:none;">
-    <h2>Generador de contenido con IA</h2>
-    <label for="content-type">Tipo de contenido:</label>
-    <select id="content-type" aria-label="Tipo de contenido">
-      <option value="post">Post para Instagram/Facebook</option>
-      <option value="tweet">Tweet</option>
-      <option value="description">Descripción de producto</option>
-      <option value="email">Email profesional</option>
-      <option value="blog-idea">Idea para blog</option>
-      <option value="headline">Titular llamativo</option>
-      <option value="ad-text">Texto para anuncio</option>
-      <option value="summary">Resumen de texto</option>
-    </select>
-
-    <label for="language">Idioma:</label>
-    <select id="language" aria-label="Idioma">
-      <option value="es">Español</option>
-      <option value="en">Inglés</option>
-    </select>
-
-    <label for="input-text">Describe el tema o palabras clave:</label>
-    <textarea id="input-text" rows="5" placeholder="Ejemplo: lanzamiento de nuevo producto tecnológico"></textarea>
-
-    <button class="generate-btn" id="generate-btn">Generar contenido</button>
-
-    <div id="output" aria-live="polite" aria-atomic="true" role="region" tabindex="0"></div>
+  <section id="funciones">
+    <h2>Funciones destacadas</h2>
+    <div class="features">
+      <div class="card">
+        <h3><i class="fas fa-robot"></i> Generación de texto</h3>
+        <p>Escribe artículos completos en segundos con solo una palabra clave.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fas fa-globe"></i> Multilenguaje</h3>
+        <p>Produce contenido en más de 25 idiomas automáticamente.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fas fa-magic"></i> Estilos y tonos</h3>
+        <p>Escoge el tono (profesional, informal, técnico, creativo...).</p>
+      </div>
+    </div>
   </section>
 
-  <!-- Blog -->
-  <section id="blog" style="display:none;">
-    <h2>Blog SmartContent</h2>
-    <article>
-      <h3>Cómo la IA revoluciona la creación de contenido</h3>
-      <p>La inteligencia artificial está transformando la manera en que creamos textos para marketing, redes sociales y más. Descubre las herramientas y técnicas más innovadoras.</p>
-    </article>
-    <article>
-      <h3>5 consejos para mejorar tu presencia digital</h3>
-      <p>Desde SEO hasta engagement, aprende los mejores consejos para destacar en el mundo digital y atraer a tu audiencia ideal.</p>
-    </article>
-    <article>
-      <h3>Automatiza tus tareas de marketing con SmartContent</h3>
-      <p>Descubre cómo nuestro generador puede ahorrarte horas de trabajo y ayudarte a enfocarte en lo que realmente importa.</p>
-    </article>
+  <section id="demo">
+    <h2>Prueba la demo</h2>
+    <p><em>(Simulación, no funcional en esta versión gratuita)</em></p>
+    <form>
+      <input type="text" placeholder="Escribe una palabra clave...">
+      <textarea rows="4" placeholder="Aquí aparecerá el contenido generado..."></textarea>
+      <button type="button" class="btn">Generar</button>
+    </form>
   </section>
 
-  <!-- Servicios -->
-  <section id="services" style="display:none;">
-    <h2>Servicios Profesionales</h2>
-    <ul>
-      <li>Generación personalizada de contenido con IA</li>
-      <li>Consultoría en marketing digital</li>
-      <li>Diseño y gestión de redes sociales</li>
-      <li>Optimización SEO para blogs y webs</li>
-      <li>Capacitación en herramientas de IA para creadores</li>
-    </ul>
-    <p>¿Quieres saber más? Contáctanos en la sección de contacto.</p>
+  <section id="planes">
+    <h2>Planes y precios</h2>
+    <div class="planes">
+      <div class="card">
+        <h3>Gratis</h3>
+        <p>Limitado a 5 textos diarios</p>
+        <p>$0 / mes</p>
+      </div>
+      <div class="card">
+        <h3>Pro</h3>
+        <p>Contenido ilimitado, soporte prioritario</p>
+        <p>$19 / mes</p>
+      </div>
+      <div class="card">
+        <h3>Empresas</h3>
+        <p>Acceso a API, cuentas múltiples, IA personalizada</p>
+        <p>$99 / mes</p>
+      </div>
+    </div>
   </section>
 
-  <!-- FAQ -->
-  <section id="faq" style="display:none;">
-    <h2>Preguntas Frecuentes</h2>
-    <h3>¿Es gratis SmartContent?</h3>
-    <p>Actualmente sí, la versión básica es totalmente gratuita para uso personal y comercial.</p>
-    <h3>¿Necesito conocimientos técnicos para usarlo?</h3>
-    <p>No, está diseñado para que cualquier persona pueda crear contenido fácilmente sin experiencia previa.</p>
-    <h3>¿Se conecta con APIs reales de IA?</h3>
-    <p>Próximamente integraremos APIs reales para mejorar la calidad y variedad del contenido generado.</p>
-    <h3>¿Puedo usar el contenido generado para
+  <section id="testimonios">
+    <h2>Lo que dicen nuestros usuarios</h2>
+    <div class="testimonios">
+      <div class="card">
+        <p>"¡Una maravilla! Me ahorra horas de trabajo."</p>
+        <strong>- Laura, redactora freelance</strong>
+      </div>
+      <div class="card">
+        <p>"Lo uso todos los días para ideas de contenido en redes."</p>
+        <strong>- Marcos, social media manager</strong>
+      </div>
+      <div class="card">
+        <p>"Una herramienta inteligente que realmente cumple."</p>
+        <strong>- Andrea, agencia de marketing</strong>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <p>¿Tienes preguntas o quieres saber más? Escríbenos:</p>
+    <form>
+      <input type="text" placeholder="Tu nombre">
+      <input type="email" placeholder="Tu email">
+      <textarea rows="5" placeholder="Escribe tu mensaje..."></textarea>
+      <button type="submit" class="btn">Enviar</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 SmartContentApp. Todos los derechos reservados.</p>
+  </footer>
+</body>
+</html>
